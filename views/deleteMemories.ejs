@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Memory</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Delete Memory</h1>
+
+    <div class="card mb-4" style="max-width: 600px; margin: auto;">
+      <% if (memory.image) { %>
+        <img
+          src="<%= memory.image.startsWith('/') ? memory.image : '/' + memory.image %>"
+          class="card-img-top"
+          alt="<%= memory.imageName %>"
+        >
+      <% } else { %>
+        <div
+          class="card-img-top d-flex align-items-center justify-content-center bg-light"
+          style="height: 200px; color: #777;"
+        >
+          No Image
+        </div>
+      <% } %>
+      <div class="card-body">
+        <h5 class="card-title"><%= memory.imageName %></h5>
+        <% if (memory.date) { %>
+          <p class="card-text">
+            <small class="text-muted">
+              Last visited: <%= (memory.date.toISOString ? memory.date.toISOString().split('T')[0] : memory.date) %>
+            </small>
+          </p>
+          <% } %>
+      
+        <% if (memory.description) { %>
+          <p class="card-text"><%= memory.description %></p>
+        <% } %>
+      </div>
+    </div>
+
+    <h4 class="text-center mb-3">Are you sure you want to delete this memory?</h4>
+
+    <form
+      action="/deletememory/<%= memory.imageId %>" method="POST" class="text-center">
+      <button type="submit" class="btn btn-danger">Yes, Delete</button>
+      <a href="/dashboard" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+  </div>
+</body>
+</html>
