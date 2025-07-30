@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
         cb(null, file.originalname); 
     }
 });
-
+//test
 const upload = multer({ storage: storage });
 
 // ---------- DB ----------
